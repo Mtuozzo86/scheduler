@@ -8,6 +8,8 @@ import WorkingDays from "./WorkingDays";
 function App() {
   const [clickedDay, onChange] = useState(new Date());
   const [availableDays, setAvailableDays] = useState([]);
+  const [freeSchedule, setFreeSchedule] = useState({});
+  console.log(freeSchedule);
   const hours = [
     "9:00am",
     "10:00am",
@@ -26,8 +28,13 @@ function App() {
     setAvailableDays([...availableDays, params]);
   }
 
-  function handleSelectedTime(params, params2) {
-    console.log('hour selected from button click:', params, params2)
+  function handleSelectedTime(hour, day) {
+    //if the state is empty, or if adding a new day, take the original state and copy it
+    setFreeSchedule((prevState) => ({
+      ...prevState,
+      //above will have the previous state, below will add the day, and add the time slot to an array, or create an empty array to populate
+      [day]: [...(freeSchedule[day] || []), hour],
+    }));
   }
 
   return (
@@ -38,14 +45,14 @@ function App() {
       <button onClick={() => AddDayToAvailability(clickedDay.toDateString())}>
         Add
       </button>
-      <WorkingDays days={availableDays} hours={hours} onAddTimeSlotToSelectedDay={handleSelectedTime} />
+      <WorkingDays
+        days={availableDays}
+        hours={hours}
+        onAddTimeSlotToSelectedDay={handleSelectedTime}
+      />
       <Reserved reserved={null} />
     </div>
   );
 }
 
 export default App;
-
-
-
-

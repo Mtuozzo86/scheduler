@@ -10,7 +10,7 @@ export default function WorkingDays({ days, hours, onAddTimeSlotToSelectedDay })
   const listOfDays = days.length > 0 && (
     <ul>
       {days.map((day) => (
-        <div style={{ display: "flex", margin: "0 200px" }}>
+        <>
           <li>{day}</li>
           <select onChange={e => setSelectedTime(e.target.value)}>
             <option value="All">Select a time</option>
@@ -21,14 +21,14 @@ export default function WorkingDays({ days, hours, onAddTimeSlotToSelectedDay })
             <button onClick={() => handleAddTimeSlotToSelectedDay(day)}>
               Add time to day
             </button>
-        </div>
+        </>
       ))}
     </ul>
   );
 
   return (
     <div>
-      <h2>My available days</h2>
+      <h2>Set my available days</h2>
       <div>{listOfDays}</div>
     </div>
   );
