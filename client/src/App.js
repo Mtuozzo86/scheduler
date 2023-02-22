@@ -4,11 +4,13 @@ import Reserved from "./Reserved";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import WorkingDays from "./WorkingDays";
+import MyAvailability from "./MyAvailability";
 
 function App() {
   const [clickedDay, onChange] = useState(new Date());
   const [availableDays, setAvailableDays] = useState([]);
   const [freeSchedule, setFreeSchedule] = useState({});
+  console.log(availableDays);
   console.log(freeSchedule);
   const hours = [
     "9:00am",
@@ -50,6 +52,7 @@ function App() {
         hours={hours}
         onAddTimeSlotToSelectedDay={handleSelectedTime}
       />
+      <MyAvailability />
       <Reserved reserved={null} />
     </div>
   );
